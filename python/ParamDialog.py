@@ -4,7 +4,7 @@ Dialog interface to a .par file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.2 2004/05/05 18:22:14 jchiang Exp $
 """
 
 import os, sys
@@ -113,6 +113,11 @@ class ParamEntry:
         dialog = EditFileDialog(self.parent, label)
         file = dialog.go(self.variable.get())
         if file:
+            try:
+                if os.path.samefile(file, os.path.basename(file)):
+                    file = os.path.basename(file)
+            except OSError:
+                pass
             self.variable.set(file)
     def getRandomInt(self):
         my_int = int(random.random()*sys.maxint/1e3)
