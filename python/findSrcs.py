@@ -4,7 +4,7 @@ Extract sources from a flux-style xml source catalog and create a
 Likelihood-style source model xml file and a ds9 region file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
-$Header: /nfs/slac/g/glast/ground/cvs/users/jchiang/likeGui/python/findSrcs.py,v 1.2 2004/04/13 23:07:17 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/findSrcs.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
 """
 
 import string, sys, celgal, copy, os
@@ -42,7 +42,7 @@ def EGDiffuse():
                + 'type="DiffuseSource">\n'
                + '    <spectrum type="PowerLaw">\n'
                + '      <parameter max="100" min="1e-05" free="1" '
-               + 'name="Prefactor" scale="1e-07" value="1.32" />\n'
+               + 'name="Prefactor" scale="1e-07" value="1.60" />\n'
                + '      <parameter max="-1" min="-3.5" free="0" '
                + 'name="Index" scale="1" value="-2.1" />\n'
                + '      <parameter max="200" min="50" free="0" '
