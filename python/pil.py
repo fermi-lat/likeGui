@@ -5,10 +5,12 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.2 2004/08/18 21:51:23 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.3 2004/09/17 00:38:40 jchiang Exp $
 #
 
+import os
 import string
+from pfilesPath import pfilesPath
 
 def accept(line):
     if (line.find('#') == 0 or len(line.split()) == 0):
@@ -22,9 +24,10 @@ def fields(line):
     return [item.strip() for item in line.split(',')[1:]]
 
 class Pil(object):
-    def __init__(self, parfile):
+    def __init__(self, pfile):
         self.params = {}
         self.names = []
+        parfile = os.path.join(pfilesPath(pfile), pfile)
         file = open(parfile, 'r')
         for line in file:
             if accept(line):
@@ -45,7 +48,7 @@ class Pil(object):
     def __call__(self):
         args = ''
         for name in self.keys():
-            args += ' ' + ''.join(('', name, '=', self.__getitem__(name)))
+            args += ' ' + ''.join(('', name, '=', `self.__getitem__(name)`))
         return args
 
 if __name__ == '__main__':
