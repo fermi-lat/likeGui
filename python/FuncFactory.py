@@ -6,7 +6,7 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.2 2004/08/12 05:19:56 jchiang Exp $
 #
 
 import copy
@@ -120,6 +120,7 @@ def PtSrc(indx=0):
     name = "point source %i" % indx
     src = '\n'.join( (('<source name= "%s" ' % name) + 'type="PointSource">',
                       '   <spectrum type="PowerLaw"/>',
+                      '   <!-- point source units are cm^-2 s^-1 MeV^-1 -->',
                       '   <spatialModel type="SkyDirFunction"/>',
                       '</source>\n') )
     (src, ) = minidom.parseString(src).getElementsByTagName('source')
@@ -139,6 +140,8 @@ def DiffuseSrc(indx=0):
     src = '\n'.join( (('<source name="%s" ' % name)
                       + 'type="DiffuseSource">',
                       '   <spectrum type="PowerLaw"/>',
+                      '   <!-- diffuse source units are ' +
+                      'cm^-2 s^-1 MeV^-1 sr^-1 -->',
                       '   <spatialModel type="ConstantValue"/>', 
                       '</source>\n') )
     (src, ) = minidom.parseString(src).getElementsByTagName('source')
