@@ -4,7 +4,7 @@ Dialog interface to a .par file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.2 2004/05/05 18:22:14 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.3 2004/06/04 18:10:40 jchiang Exp $
 """
 
 import os, sys
@@ -62,7 +62,7 @@ class ParamEntry:
         elif self.fields[4].find("|") > 0:
             self.makeOptionsMenu(row)
             entryState = Tkinter.DISABLED
-        elif self.fields[0] == "Random_seed":
+        elif self.fields[0] == "random_seed":
             self.makeRandomSeed(row)
             entryState = Tkinter.NORMAL
         else:
