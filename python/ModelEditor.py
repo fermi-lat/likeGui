@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.3 2004/08/11 21:40:50 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.4 2004/11/02 05:19:13 jchiang Exp $
 #
 
 import os
@@ -128,6 +128,7 @@ class RootWindow(Tk.Tk):
         xmlFile = SaveFileDialog(self).go(pattern='*.xml')
         if xmlFile:
             self.srcModel.writeTo(xmlFile)
+            self.modelEditor.selectSource()
             self.srcModel.filename = xmlFile
             self.title('Source Model Editor: ' + os.path.basename(xmlFile))
     def addPointSource(self):
