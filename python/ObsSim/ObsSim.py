@@ -5,7 +5,7 @@ Prototype GUI for obsSim
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.2 2004/12/13 17:55:13 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.3 2004/12/14 00:21:57 jchiang Exp $
 #
 
 import os
@@ -242,8 +242,12 @@ class SourceList(Tk.Frame):
         for src in self.srcs.ordered_keys:
             self.listBox.insert(Tk.END, src)
     def deleteSelected(self):
-        src = self.listBox.get('active')
-        self.srcs.delete(src)
+        indices = self.listBox.curselection()
+        targets = []
+        for indx in indices:
+            targets.append(self.srcs.ordered_keys[int(indx)])
+        for target in targets:
+            self.srcs.delete(self.srcs[target])
         self.fill()
     def selectAll(self):
         self.listBox.selection_set(0, self.listBox.size())
