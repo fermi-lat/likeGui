@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.10 2004/12/13 06:22:49 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.11 2004/12/14 05:07:58 jchiang Exp $
 #
 
 import os, sys
@@ -66,7 +66,7 @@ class Pil(object):
     def __call__(self):
         args = ''
         for name in self.keys():
-            args += ' ' + ''.join(('', name, '=', `self.__getitem__(name)`))
+            args += ' ' + ''.join(('', name, '=%s' % self.__getitem__(name)))
         return args
     def write(self, filename=None):
         if filename is None:
