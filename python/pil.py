@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.5 2004/10/08 15:11:06 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.6 2004/10/22 20:23:50 jchiang Exp $
 #
 
 import os
@@ -34,14 +34,15 @@ class Pil(object):
         self.params = {}
         self.names = []
         if not havePathToFile(pfile):
-            parfile = os.path.join(pfilesPath(pfile), pfile)
+            self.parfile = os.path.join(pfilesPath(pfile), pfile)
         else:
-            parfile = pfile
-        file = open(parfile, 'r')
+            self.parfile = pfile
+        file = open(self.parfile, 'r')
         for line in file:
             if accept(line):
                 self.params[name(line)] = fields(line)
                 self.names.append(name(line))
+        file.close()
     def keys(self):
         return self.names
     def __getitem__(self, name):
@@ -62,13 +63,14 @@ class Pil(object):
         for name in self.keys():
             args += ' ' + ''.join(('', name, '=', `self.__getitem__(name)`))
         return args
+    def write(self):
+        file = open(self.parfile, 'w')
+        for name in self.names:
+            file.write("%s,%s\n" % (name, ",".join(self.params[name])))
 
 if __name__ == '__main__':
     pars = Pil('likelihood.par')
     print pars['event_file']
-    print pars['Spacecraft_file_hdu']
-    pars['Spacecraft_file_hdu'] = 3
     pars['event_file'] = 'foo'
-    print pars['Spacecraft_file_hdu']
     print pars()
-
+    pars.write()
