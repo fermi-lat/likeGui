@@ -6,7 +6,7 @@ Prototype GUI interface for the likelihood program.
          P. Nolan <pln@razzle.stanford.edu>
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.5 2004/09/17 00:40:59 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.6 2004/11/02 05:19:13 jchiang Exp $
 #
 
 import sys, os, time, string
@@ -19,7 +19,7 @@ from EditFileDialog import *
 from ScrolledText import ScrolledText
 from ThreadedClient import *
 import readXml
-import findSrcs
+import extractSources
 
 likePath = os.path.join(os.environ['LIKELIHOODROOT'], os.environ['BINDIR'], '')
                         
@@ -148,8 +148,7 @@ class FileMenu(Tkinter.Menu):
                                 command=self.grandparent.disableEditing,
                                 underline=0)
     def cd(self):
-        file = tkFileDialog.askdirectory(title="Where to?",
-                mustexist=1)
+        file = tkFileDialog.askdirectory(title="Where to?", mustexist=1)
         #file = FileDialog(self.parent).go()
         try:
             os.chdir(file)
@@ -162,8 +161,8 @@ class FileMenu(Tkinter.Menu):
         filename = dialog.go()
     def sendPythonCommand(self):
         cmd = tkSimpleDialog.askstring("Python command",
-                                       "Enter a command to send "
-                                       + "to the Python interpreter")
+                                       "Enter a command to send " + 
+                                       "to the Python interpreter")
         try:
             import cStringIO
             save = sys.stdout
@@ -214,7 +213,7 @@ class LikeMenu(Tkinter.Menu):
             if xmlFile:
                 self.grandparent.writeText("Error reading " + xmlFile + "\n")
     def extract(self):
-        sources = findSrcs.SourceRegionDialog(self.grandparent)
+        sources = extractSources.SourceRegionDialog(self.grandparent)
         if sources.haveSources:
             self.readFile(sources.filename.value())
 
@@ -234,8 +233,7 @@ class AppsMenu(Tkinter.Menu):
         self.add_separator()
         self.add_command(label="obsSim", command=self.obsSim, underline=3)
         self.add_separator()
-        self.add_command(label="dataSubselector",
-                         command=self.dataSubselector,
+        self.add_command(label="dataSubselector", command=self.dataSubselector,
                          underline=0)
         self.add_separator()
         self.add_command(label="evtbin", command=self.evtbin, underline=3)

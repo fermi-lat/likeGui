@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.11 2004/11/08 20:33:57 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.12 2004/11/27 20:07:17 jchiang Exp $
 #
 
 import os
@@ -27,7 +27,10 @@ class RootWindow(Tk.Tk):
     def __init__(self, spectralFuncs, spatialFuncs, xmlFile=None):
         Tk.Tk.__init__(self)
         self.srcModel = readXml.SourceModel(xmlFile)
-        self.title("Source Model Editor")
+        if xmlFile is not None:
+            self.title("Source Model Editor: " + xmlFile)
+        else:
+            self.title("Source Model Editor")
         self.ptsrcs = 0
         self.difsrcs = 0
 
