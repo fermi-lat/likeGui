@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.6 2004/10/22 20:23:50 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.7 2004/10/22 23:24:13 jchiang Exp $
 #
 
 import os
@@ -38,7 +38,9 @@ class Pil(object):
         else:
             self.parfile = pfile
         file = open(self.parfile, 'r')
+        self.lines = []
         for line in file:
+            self.lines.append(line)
             if accept(line):
                 self.params[name(line)] = fields(line)
                 self.names.append(name(line))
@@ -65,12 +67,16 @@ class Pil(object):
         return args
     def write(self):
         file = open(self.parfile, 'w')
-        for name in self.names:
-            file.write("%s,%s\n" % (name, ",".join(self.params[name])))
+        for line in self.lines:
+            item = name(line)
+            if item in self.names:
+                file.write("%s,%s\n" % (item, ",".join(self.params[item])))
+            else:
+                file.write(line)
 
 if __name__ == '__main__':
     pars = Pil('likelihood.par')
     print pars['event_file']
-    pars['event_file'] = 'foo'
+    pars['event_file'] = "foo"
     print pars()
     pars.write()
