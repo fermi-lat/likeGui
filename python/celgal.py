@@ -4,11 +4,16 @@ Class for transforming between Equatorial and Galactic coordinates.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/celgal.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/celgal.py,v 1.2 2004/05/19 21:48:30 jchiang Exp $
 """
 
-#from math import *
-from numarray import *
+try:
+    from numarray import *
+except ImportError:
+    from math import *
+    arcsin = asin
+    arccos = acos
+    arctan2 = atan2
 
 class celgal:
     def __init__(self, J2000=1):
