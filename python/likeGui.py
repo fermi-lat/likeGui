@@ -6,7 +6,7 @@ Prototype GUI interface for the likelihood program.
          P. Nolan <pln@razzle.stanford.edu>
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.4 2004/08/11 21:40:50 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.5 2004/09/17 00:40:59 jchiang Exp $
 #
 
 import sys, os, time, string
@@ -19,7 +19,6 @@ from EditFileDialog import *
 from ScrolledText import ScrolledText
 from ThreadedClient import *
 import readXml
-#import findPaths
 import findSrcs
 
 likePath = os.path.join(os.environ['LIKELIHOODROOT'], os.environ['BINDIR'], '')
