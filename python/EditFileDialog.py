@@ -5,7 +5,7 @@ added to the standard FileDialog.FileDialog.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/users/jchiang/likeGui/python/EditFileDialog.py,v 1.3 2004/01/21 01:04:23 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/EditFileDialog.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
 """
 
 import Tkinter, os, sys
@@ -54,7 +54,8 @@ def cleanPathName(file):
         file = prefix + os.sep + mat.group(2)
     if os.name == "nt":
         import win32api
-        try: shortpath = win32api.GetShortPathName(file)
+        try:
+            shortpath = win32api.GetShortPathName(file)
         except:
             shortpath = file
         return shortpath            

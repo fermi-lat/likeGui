@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.10 2004/11/05 20:13:17 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.11 2004/11/08 20:33:57 jchiang Exp $
 #
 
 import os
@@ -257,6 +257,7 @@ class ds9Display(object):
         self.file = file
     def __call__(self):
         try:
+            ds9.cd(os.path.abspath(os.curdir))
             ds9.clear_regions()
             try:
                 os.remove(self.file)
@@ -278,6 +279,7 @@ class ds9Import(object):
         self.file = file
     def __call__(self):
         try:
+            ds9.cd(os.path.abspath(os.curdir))
             ds9.save_regions(self.file)
             for coords in read_coords(self.file):
                 src = readXml.Source(copy.deepcopy(findSrcs.ptSrc()))
