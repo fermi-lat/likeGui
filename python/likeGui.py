@@ -6,7 +6,7 @@ Prototype GUI interface for the likelihood program.
          P. Nolan <pln@razzle.stanford.edu>
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.2 2004/05/25 20:53:32 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.3 2004/06/28 12:15:55 jchiang Exp $
 #
 
 import sys, os, time, string
@@ -42,7 +42,7 @@ class RootWindow(Tkinter.Tk):
         Tkinter.Tk.__init__(self)
         self.executable = executable
         self.debug = debug
-        self.title("likelihood: " + os.path.abspath(''))
+        self.title("likeGui: " + os.path.abspath(''))
         self.menuBar = MenuBar(self)
         self.textPanel = TextPanel(self)
         self.likeThread = None

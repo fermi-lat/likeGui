@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.2 2004/06/28 12:15:55 jchiang Exp $
 #
 
 import os
@@ -307,8 +307,8 @@ class AttributeDialog(mySimpleDialog.Dialog):
                         value = 1
                 else:
                     value = string.atof(attribute.variable.get())
-                    self.parameter.__dict__[attribute.name] = value
-                    self.parameter.setAttributes()
+                self.parameter.__dict__[attribute.name] = value
+                self.parameter.setAttributes()
             except:
                 pass
             
