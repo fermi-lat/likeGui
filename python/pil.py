@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.9 2004/11/27 20:07:17 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.10 2004/12/13 06:22:49 jchiang Exp $
 #
 
 import os, sys
@@ -75,7 +75,10 @@ class Pil(object):
         for line in self.lines:
             item = name(line)
             if item in self.names:
-                file.write("%s,%s\n" % (item, ",".join(self.params[item])))
+                params = self.params[item]
+                for i in range(len(params)):
+                    params[i] = params[i].strip("'")
+                file.write("%s,%s\n" % (item, ",".join(params)))
             else:
                 file.write(line)
         file.close()
