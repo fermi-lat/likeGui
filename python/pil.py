@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.4 2004/10/08 15:06:33 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.5 2004/10/08 15:11:06 jchiang Exp $
 #
 
 import os
@@ -23,12 +23,20 @@ def name(line):
 def fields(line):
     return [item.strip() for item in line.split(',')[1:]]
 
+def havePathToFile(file):
+    basename = os.path.basename(file)
+    path = file.split(basename)[0]
+    return path != "" and basename in os.listdir() 
+
 class Pil(object):
     def __init__(self, pfile, raiseKeyErrors=True):
         self.raiseKeyErrors = raiseKeyErrors
         self.params = {}
         self.names = []
-        parfile = os.path.join(pfilesPath(pfile), pfile)
+        if not havePathToFile(pfile):
+            parfile = os.path.join(pfilesPath(pfile), pfile)
+        else:
+            parfile = pfile
         file = open(parfile, 'r')
         for line in file:
             if accept(line):
