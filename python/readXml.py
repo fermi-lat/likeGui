@@ -3,7 +3,7 @@ A module to encapsulate a Likelihood source model xml file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/readXml.py,v 1.3 2004/08/11 21:40:51 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/readXml.py,v 1.4 2004/08/12 05:19:56 jchiang Exp $
 """
 import os, sys, string
 from xml.dom import minidom
@@ -23,8 +23,11 @@ class SourceModel:
             self.doc = minidom.parseString(defaultModel)
         srcs = self.doc.getElementsByTagName("source")
         self.srcList = {}
-        for src in srcs:
-            self.srcList[src.getAttribute("name").encode()] = Source(src)
+        try:
+            for src in srcs:
+                self.srcList[src.getAttribute("name").encode()] = Source(src)
+        except ValueError:
+            pass
             
     def setAttributes(self):
         for src in self.srcList.values():
