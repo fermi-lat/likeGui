@@ -3,9 +3,9 @@ A module to encapsulate a Likelihood source model xml file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/users/jchiang/likeGui/python/readXml.py,v 1.5 2004/04/28 02:51:05 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/readXml.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
 """
-import sys, string
+import os, sys, string
 from xml.dom import minidom
 
 defaultModel = '\n'.join( ('<?xml version="1.0"?>',
@@ -14,11 +14,11 @@ defaultModel = '\n'.join( ('<?xml version="1.0"?>',
 
 class SourceModel:
     def __init__(self, xmlFile=None):
-        if xmlFile:
+        if xmlFile and os.path.isfile(xmlFile):
             self.filename = xmlFile.strip(" ")
             self.doc = minidom.parse(self.filename)
         else:
-            self.filename = None
+            self.filename = xmlFile
             self.doc = minidom.parseString(defaultModel)
         srcs = self.doc.getElementsByTagName("source")
         self.srcList = {}

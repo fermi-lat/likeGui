@@ -4,7 +4,7 @@ Class for transforming between Equatorial and Galactic coordinates.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/celgal.py,v 1.3 2004/05/25 20:53:32 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/celgal.py,v 1.4 2004/05/27 05:52:27 jchiang Exp $
 """
 
 try:
@@ -42,21 +42,26 @@ class celgal:
 
     def glon(self, ra, dec) :
         """Galactic longitude as a function of Equatorial coordinates"""
-        sdec = sin(float(dec)*pi/180.)
-        cdec = cos(float(dec)*pi/180.)
-        sdra = sin((float(ra)-self.zrot1)*pi/180.)
-        cdra = cos((float(ra)-self.zrot1)*pi/180.)
+        sdec = sin(dec*pi/180.)
+        cdec = cos(dec*pi/180.)
+        sdra = sin((ra-self.zrot1)*pi/180.)
+        cdra = cos((ra-self.zrot1)*pi/180.)
         glon = self.zrot2 + arctan2(cdec*sdra*self.cos_xrot+sdec*self.sin_xrot,
                                     cdec*cdra)*180./pi
-        if glon < 0. : glon = glon + 360.
-        if glon > 360. : glon = glon - 360.
+        try:
+            if glon < 0. : glon += 360.
+            if glon > 360. : glon -= 360.
+        except RuntimeError:
+            for i in xrange(len(glon)):
+                if glon[i] < 0.: glon[i] += 360.
+                if glon[i] > 360.: glon[i] -= 360.
         return glon
 
     def glat(self, ra, dec) :
         """Galactic latitude as a function of Equatorial coordinates"""
-        sdec = sin(float(dec)*pi/180.)
-        cdec = cos(float(dec)*pi/180.)
-        sdra = sin((float(ra)-self.zrot1)*pi/180.)
+        sdec = sin(dec*pi/180.)
+        cdec = cos(dec*pi/180.)
+        sdra = sin((ra-self.zrot1)*pi/180.)
         return arcsin(sdec*self.cos_xrot-cdec*sdra*self.sin_xrot)*180./pi
             
     def RA(self, longitude, latitude) :
