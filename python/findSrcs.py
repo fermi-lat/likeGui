@@ -4,7 +4,7 @@ Extract sources from a flux-style xml source catalog and create a
 Likelihood-style source model xml file and a ds9 region file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/findSrcs.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/findSrcs.py,v 1.2 2004/08/11 22:07:07 jchiang Exp $
 """
 
 import string, sys, celgal, copy, os
@@ -285,6 +285,16 @@ class ParamFileEntry:
             self.variable.set(file)
 
 if __name__ == '__main__':
-    root = Tkinter.Tk()
-    dialog = SourceRegionDialog(root)
-    root.mainloop()
+    from pil import Pil
+    from pfilesPath import *
+    try:
+        pfile = os.path.join(pfilesPath("findSrcs.par"), "findSrcs.par")
+        pars = Pil(pfile)
+        if pars['input_file'] == 'DEFAULT':
+            input_file = inputXmlFile
+        else:
+            input_file = pars['input_file']
+        extractFrom3EG(pars['ra0'], pars['dec0'], pars['radius'],
+                       pars['flux_limit'], pars['output_file'], input_file)
+    except ParFileError:
+        SourceRegionDialog(Tkinter.Tk())

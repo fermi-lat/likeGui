@@ -6,11 +6,12 @@ desired .par file.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/users/jchiang/likeGui/python/pfilesPath.py,v 1.3 2004/04/22 16:22:00 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pfilesPath.py,v 1.1.1.1 2004/04/29 17:30:48 jchiang Exp $
 #
 
 import os, sys
 
+ParFileError = 'ParFileError'
 def pfilesPath(parfile):
     try:
         paths = os.environ['PFILES'].split(os.pathsep)
@@ -23,7 +24,7 @@ def pfilesPath(parfile):
                 return path
         except OSError:
             pass
-    raise 'ParFileError', ".par file " + parfile + " not found."
+    raise ParFileError, ".par file " + parfile + " not found."
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
