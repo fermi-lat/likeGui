@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/users/jchiang/likeGui/python/pil.py,v 1.1 2004/04/14 16:51:56 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.1 2004/05/29 00:14:51 jchiang Exp $
 #
 
 def accept(line):
@@ -37,7 +37,7 @@ class Pil(object):
     def __call__(self):
         args = ''
         for name in self.keys():
-            args += ' ' + self.__getitem__(name)
+            args += ' ' + ''.join(('', name, '=', self.__getitem__(name)))
         return args
 
 if __name__ == '__main__':
