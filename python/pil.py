@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.3 2004/09/17 00:38:40 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/pil.py,v 1.4 2004/10/08 15:06:33 jchiang Exp $
 #
 
 import os
@@ -24,7 +24,8 @@ def fields(line):
     return [item.strip() for item in line.split(',')[1:]]
 
 class Pil(object):
-    def __init__(self, pfile):
+    def __init__(self, pfile, raiseKeyErrors=True):
+        self.raiseKeyErrors = raiseKeyErrors
         self.params = {}
         self.names = []
         parfile = os.path.join(pfilesPath(pfile), pfile)
@@ -44,7 +45,10 @@ class Pil(object):
         else:
             return value
     def __setitem__(self, name, value):
-        self.params[name][2] = `value`
+        if name in self.names:
+            self.params[name][2] = `value`
+        elif self.raiseKeyErrors:
+            raise KeyError, name
     def __call__(self):
         args = ''
         for name in self.keys():
