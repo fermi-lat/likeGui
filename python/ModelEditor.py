@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.7 2004/11/05 06:16:32 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.8 2004/11/05 16:06:55 jchiang Exp $
 #
 
 import os
@@ -34,7 +34,10 @@ class RootWindow(Tk.Tk):
         try:
             global ds9
             import ds9
-            ds9.cd(os.path.abspath(os.curdir))
+            try:
+                ds9.cd(os.path.abspath(os.curdir))
+            except RuntimeError:
+                pass
         except ImportError:
             showwarning(title="ds9 Access Warning",
                         message="Import error for ds9 package.")
