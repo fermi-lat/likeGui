@@ -5,8 +5,9 @@ by Russell Owen's RO.DS9 package.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header$
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ds9.py,v 1.1 2004/11/05 06:16:32 jchiang Exp $
 #
+import os
 from RO.DS9 import *
 
 def display(file, extension=None):
@@ -49,6 +50,12 @@ def save_regions(file='ds9.reg'):
 
 def clear_regions():
     xpaset("regions delete all")
+
+def cd(dir=None):
+    if dir is None:
+        return xpaget("cd").strip()
+    else:
+        xpaset("cd " + dir)
 
 if __name__ == "__main__":
     filename = "sourceMaps.fits"
