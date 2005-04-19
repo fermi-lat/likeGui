@@ -4,7 +4,7 @@ Class for transforming between Equatorial and Galactic coordinates.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/celgal.py,v 1.6 2005/02/17 17:08:16 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/celgal.py,v 1.7 2005/04/13 22:22:22 jchiang Exp $
 """
 
 try:
@@ -102,6 +102,7 @@ def dist(a, b):
     return Angdist(mu)*180./pi
 
 def SphCoords(u):
+    import math
     """Spherical coordinates in radians for a normalised 3Dvector u"""
     if abs(u[2]) < 1:
         theta_rad = math.asin(u[2])
