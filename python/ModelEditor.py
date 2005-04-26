@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.15 2005/03/14 17:25:18 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.16 2005/04/26 00:02:23 jchiang Exp $
 #
 
 import os
@@ -250,9 +250,12 @@ def pwd():
 class ds9Menu(Tk.Menu):
     def __init__(self, root):
         Tk.Menu.__init__(self, tearoff=0)
-        self.add_command(label="Display sources", underline=0,
-                         command=root.ds9Display)
-#                         command=ds9Display(root))
+#        try:
+#            root.ds9Display
+#        except AttributeError:
+#            root.ds9Display = ds9Display(root)
+#        self.add_command(label="Display sources", underline=0,
+#                         command=root.ds9Display)
         self.add_command(label="Import sources", underline=0,
                          command=ds9Import(root))
 
