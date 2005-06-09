@@ -6,7 +6,7 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.2 2004/08/12 05:19:56 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.3 2004/11/03 20:54:44 jchiang Exp $
 #
 
 import copy
@@ -25,6 +25,17 @@ def PowerLaw():
                        '   <parameter free="0" max="2000.0" min="30.0" '
                        + 'name="Scale" scale="1.0" value="100.0"/>',
                        '</spectrum>\n') )
+    (func, ) = minidom.parseString(func).getElementsByTagName('spectrum')
+    return Function(func)
+
+def PowerLaw2():
+    func = """<spectrum type="PowerLaw2">
+      <parameter free="1" max="1000.0" min="1e-05" name="Integral" scale="1e-06" value="1.0"/>
+      <parameter free="1" max="-1.0" min="-5.0" name="Index" scale="1.0" value="-2.0"/>
+      <parameter free="0" max="200000.0" min="20.0" name="LowerLimit" scale="1.0" value="30.0"/>
+      <parameter free="0" max="200000.0" min="20.0" name="UpperLimit" scale="1.0" value="2e5"/>
+    </spectrum>
+"""
     (func, ) = minidom.parseString(func).getElementsByTagName('spectrum')
     return Function(func)
 
@@ -103,6 +114,7 @@ class Spectra(FuncContainer):
     def __init__(self):
         FuncContainer.__init__(self)
         self.funcs['PowerLaw'] = PowerLaw()
+        self.funcs['PowerLaw2'] = PowerLaw2()
         self.funcs['BrokenPowerLaw'] = BrokenPowerLaw()
         self.funcs['Gaussian'] = Gaussian()
 
