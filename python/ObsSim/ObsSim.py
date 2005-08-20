@@ -5,7 +5,7 @@ Prototype GUI for obsSim
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.8 2005/01/15 06:11:32 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.9 2005/02/08 01:42:44 jchiang Exp $
 #
 import os, sys
 import Tkinter as Tk
@@ -61,7 +61,6 @@ class RootWindow(Tk.Tk):
         pars['xml_source_file'] = xmlList
         pars['source_list'] = sourceNames
         pfile = 'gtobssim.par'
-        pars.write(pfile)   # create a local copy
         dialog = ParamDialog(self, pfile)
         if dialog.paramString:
             command = " ".join((obsSim, dialog.paramString))
@@ -69,7 +68,6 @@ class RootWindow(Tk.Tk):
     def orbSim(self):
         pars = Pil('gtorbsim.par')
         pfile = 'gtorbsim.par'
-        pars.write(pfile)   # create a local copy
         dialog = ParamDialog(self, pfile)
         if dialog.paramString:
             command = " ".join((orbSim, dialog.paramString))

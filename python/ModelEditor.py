@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.18 2005/06/04 06:04:27 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.19 2005/06/11 21:28:54 jchiang Exp $
 #
 
 import os
@@ -277,7 +277,7 @@ class ds9Display(object):
                     region_file.addSource(srcName, src)
                     region_file.write()
             ds9.load_regions(self.file)
-        except RuntimeError:
+        except:
             pass
 
 class ds9Import(object):
@@ -296,7 +296,7 @@ class ds9Import(object):
                 src.spatialModel.DEC.value = coords[1]
                 src.setAttributes()
                 self.root.addPointSource(src)
-        except RuntimeError:
+        except:
             pass
 
 def read_coords(regfile="ds9.reg"):
