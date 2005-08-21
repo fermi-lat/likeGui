@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.19 2005/06/11 21:28:54 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.20 2005/08/20 16:25:39 jchiang Exp $
 #
 
 import os
@@ -15,6 +15,7 @@ import string
 import Tkinter as Tk
 
 from FileDialog import Dialog, LoadFileDialog, SaveFileDialog
+import tkFileDialog
 from tkMessageBox import showwarning
 import mySimpleDialog
 
@@ -131,6 +132,12 @@ class RootWindow(Tk.Tk):
         else:
             src.type = "DiffuseSource"
         src.setAttributes()
+    def cd(self):
+        file = tkFileDialog.askdirectory(title="Where to?", mustexist=1)
+        try:
+            os.chdir(file)
+        except:
+            pass
     def open(self, xmlFile=None):
         if not xmlFile:
             xmlFile = LoadFileDialog(self).go(pattern='*.xml')
@@ -221,6 +228,7 @@ class FileMenu(Tk.Menu):
     def __init__(self, root):
         Tk.Menu.__init__(self, tearoff=0, postcommand=self.stat)
         self.root = root
+        self.add_command(label="cd...", underline=0, command=root.cd)
         self.add_command(label="Open...", underline=0, command=root.open)
         self.add_command(label="Extract...", underline=1, command=root.extract)
         self.add_command(label="Import...", underline=0,
@@ -504,8 +512,7 @@ def ModelEditor(filename=None):
     root.mainloop()
 
 if __name__ == "__main__":
-    if len(sys.argv) == 2:
-        root = RootWindow(_spectralFuncs, _spatialFuncs, sys.argv[1])
+    if sys.argv[1:]:
+        ModelEditor(sys.argv[1])
     else:
-        root = RootWindow(_spectralFuncs, _spatialFuncs)
-    root.mainloop()
+        ModelEditor()
