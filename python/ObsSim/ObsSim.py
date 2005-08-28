@@ -5,7 +5,7 @@ Prototype GUI for obsSim
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.11 2005/08/21 20:15:33 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.12 2005/08/27 16:49:14 jchiang Exp $
 #
 import os, sys, time
 import Tkinter as Tk
@@ -240,7 +240,7 @@ class CandidateSources(Tk.Frame):
         srcElts = srcLib.getElementsByTagName('source')
         self.sources = map()
         for src in srcElts:
-            name = src.getAttribute('name').encode()
+            name = src.getAttribute('name').encode().strip()
             self.sources[name] = src
         self.listBox.delete(0, Tk.END)
         for src in self.sources.ordered_keys:
