@@ -6,15 +6,12 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.5 2005/07/18 23:33:31 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.6 2005/09/09 23:41:43 jchiang Exp $
 #
 
 import copy
 from xml.dom import minidom
 from readXml import Source, Function, Parameter
-from tkMessageBox import showwarning
-
-_map_cube_warning_issued = False
 
 #
 # Spectra
@@ -127,11 +124,6 @@ def MapCubeFunction():
 </spatialModel>
 """
     func = minidom.parseString(func).getElementsByTagName('spatialModel')[0]
-#    global _map_cube_warning_issued
-#    if not _map_cube_warning_issued:
-#        showwarning('', 'Be sure to use "ConstantValue" as your ' +
-#                    'spectrum when using MapCubeFunction')
-#        _map_cube_warning_issued = True
     return Function(func)
 
 #
