@@ -4,7 +4,7 @@ Create an xml point source library from an ascii file.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header$
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/create_library.py,v 1.1 2005/08/27 16:49:14 jchiang Exp $
 #
 
 import sys, os
@@ -19,8 +19,8 @@ _ptsrc_template = """<source name="%s" flux="%.3e">
 </source>
 """
 
-def ptsrc(name, flux, ra, dec, gamma, emin=20, emax=1e6,
-          gamma2=None, ebreak=2e3):
+def ptsrc(name, ra, dec, flux, gamma, gamma2=None, ebreak=2e3,
+          emin=20, emax=1e6):
     if gamma2 is not None:
         bpl = 'gamma2="%.2f" ebreak="%.1f" ' % (float(gamma2), float(ebreak))
     else:
@@ -52,8 +52,17 @@ def makeSrcLib(inputfile):
     return outlines
 
 if __name__ == '__main__':
-    infile = "srclib.txt"
+    import sys
+    if sys.argv[1:2]:
+        infile = sys.argv[1]
+    else:
+        infile = "srclib.txt"
     items = makeSrcLib(infile)
-    for item in items:
-        print item
-        
+    if sys.argv[2:3]:
+        outfile = open(sys.argv[2], 'w')
+        for item in items:
+            outfile.write(item + '\n')
+        outfile.close()
+    else:
+        for item in items:
+            print item
