@@ -6,7 +6,7 @@ Likelihood-style source model xml file and a ds9 region file.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.6 2005/06/04 06:04:27 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.7 2005/06/11 21:28:54 jchiang Exp $
 #
 import os, sys, string, copy
 from xml.dom import minidom
@@ -34,7 +34,7 @@ class SourceList(object):
             or particles[0].getAttribute('name').encode('ascii') != 'gamma'):
             return False
         return True
-    def extract(self, outputFile, roiCone, fluxLimit=1e-2, useDiffuse=True,
+    def extract(self, outputFile, roiCone, fluxLimit=1e-2, useDiffuse=False,
                 useCatVal=True):
         ra0, dec0, radius = roiCone
         ds9File = ds9_region_file('ds9.reg', fk5=1)
