@@ -6,7 +6,7 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.7 2005/09/11 04:18:36 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.8 2005/09/19 00:20:21 jchiang Exp $
 #
 
 import copy
@@ -37,6 +37,14 @@ def PowerLaw2():
     </spectrum>
 """
     (func, ) = minidom.parseString(func).getElementsByTagName('spectrum')
+    return Function(func)
+
+def FileFunction():
+    func = """<spectrum type="FileFunction" file="foo.dat">
+ <parameter free="1" max="1e5" min="1e-5" name="Normalization" scale="1" value="1.0"/>
+</spectrum>
+"""
+    func = minidom.parseString(func).getElementsByTagName('spectrum')[0]
     return Function(func)
 
 def BrokenPowerLaw():
@@ -163,6 +171,7 @@ class Spectra(FuncContainer):
         self.funcs['LogParabola'] = LogParabola()
         self.funcs['Gaussian'] = Gaussian()
         self.funcs['ConstantValue'] = ConstantValueSpectrum()
+        self.funcs['FileFunction'] = FileFunction()
 
 class SpatialModels(FuncContainer):
     def __init__(self):

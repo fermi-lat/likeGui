@@ -4,7 +4,7 @@ Dialog interface to a .par file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.3 2004/06/04 18:10:40 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.4 2004/12/14 18:29:39 jchiang Exp $
 """
 
 import os, sys
@@ -107,7 +107,7 @@ class ParamEntry:
         try:
             my_value = "%s" % eval(self.variable.get())
         except:
-            my_value = self.variable.get()
+            my_value = '"%s"' % self.variable.get()
         return my_value
     def getFile(self, label='Edit File Dialog'):
         dialog = EditFileDialog(self.parent, label)
