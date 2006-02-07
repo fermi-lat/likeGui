@@ -6,7 +6,7 @@ Prototype GUI interface for the likelihood program.
          P. Nolan <pln@razzle.stanford.edu>
 """
 #
-#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.6 2004/11/02 05:19:13 jchiang Exp $
+#$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/likeGui.py,v 1.7 2005/01/15 06:11:32 jchiang Exp $
 #
 
 import sys, os, time, string
@@ -600,10 +600,13 @@ class SourceEntry:
             free = int(self.spectrum[paramName][1].get())
             self.srcElement.spectrum.parameters[paramName].free = free
 
-if __name__ == "__main__":
+def likeGui():
     debug = 0
     for name in sys.argv:
         if name == "-debug":
             debug = 1
     root = RootWindow(debug=debug)
     root.mainloop()
+
+if __name__ == "__main__":
+    likeGui()

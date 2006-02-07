@@ -4,7 +4,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/likeGui/src/ObsSim.cxx,v 1.1 2005/08/26 21:34:52 jchiang Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/likeGui/src/ObsSim.cxx,v 1.2 2005/09/19 00:20:22 jchiang Exp $
  */
 
 #include <cstdlib>
@@ -13,13 +13,6 @@
 #include <string>
 
 int main() {
-   std::string command;
-   char * root_path = std::getenv("LIKEGUIROOT");
-   if (root_path == 0) {
-      std::cerr << "Environment variable LIKEGUIROOT not found." << std::endl;
-      return 1;
-   }
-   std::string pythonDir = std::string(root_path) + "/python";
-   command = std::string("python ") + pythonDir + "/ObsSim/ObsSim.py";
+   std::string command("python -c \"import ObsSim; ObsSim.ObsSim()\"");
    std::system(command.c_str());
 }
