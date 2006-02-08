@@ -6,7 +6,7 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.9 2005/12/14 01:38:48 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.10 2006/01/14 00:34:29 jchiang Exp $
 #
 
 import copy
@@ -32,7 +32,7 @@ def PowerLaw2():
     func = """<spectrum type="PowerLaw2">
       <parameter free="1" max="1000.0" min="1e-05" name="Integral" scale="1e-06" value="1.0"/>
       <parameter free="1" max="-1.0" min="-5.0" name="Index" scale="1.0" value="-2.0"/>
-      <parameter free="0" max="200000.0" min="20.0" name="LowerLimit" scale="1.0" value="30.0"/>
+      <parameter free="0" max="200000.0" min="20.0" name="LowerLimit" scale="1.0" value="20.0"/>
       <parameter free="0" max="200000.0" min="20.0" name="UpperLimit" scale="1.0" value="2e5"/>
     </spectrum>
 """
@@ -81,7 +81,7 @@ def BrokenPowerLaw2():
         <parameter free="1" max="-1.0" min="-5.0" name="Index1" scale="1.0" value="-1.8"/>
         <parameter free="1" max="-1.0" min="-5.0" name="Index2" scale="1.0" value="-2.3"/>
         <parameter free="1" max="10000.0" min="30.0" name="BreakValue" scale="1.0" value="1000.0"/>
-        <parameter free="0" max="200000.0" min="20.0" name="LowerLimit" scale="1.0" value="30.0"/>
+        <parameter free="0" max="200000.0" min="20.0" name="LowerLimit" scale="1.0" value="20.0"/>
         <parameter free="0" max="200000.0" min="20.0" name="UpperLimit" scale="1.0" value="2e5"/>
       </spectrum>
 """

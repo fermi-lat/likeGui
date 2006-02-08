@@ -4,16 +4,17 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/likeGui/src/ModelEditor.cxx,v 1.2 2005/09/19 00:20:21 jchiang Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/likeGui/src/ModelEditor.cxx,v 1.3 2006/02/07 22:45:56 jchiang Exp $
  */
 
-#include <cstdlib>
+#include <sstream>
 
-#include <iostream>
-#include <string>
-
-int main(int iargc, char *argv[]) {
-   std::string command 
-      = "python -c \"import ModelEditor; ModelEditor.ModelEditor()\"";
-   std::system(command.c_str());
+int main(int iargc, char * argv[]) {
+   std::ostringstream command;
+   command << "python -c \"import ModelEditor; ModelEditor.ModelEditor(";
+   if (iargc == 2) {
+      command << "\'" << argv[1] << "\'";
+   }
+   command << ")\"";
+   std::system(command.str().c_str());
 }
