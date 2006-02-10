@@ -5,7 +5,7 @@ Prototype GUI for obsSim
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.16 2005/12/14 01:38:49 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.17 2006/02/07 22:45:56 jchiang Exp $
 #
 import os, sys, time
 import Tkinter as Tk
@@ -28,10 +28,10 @@ obsSim = os.path.join(os.environ["OBSERVATIONSIMROOT"],
                       os.environ["BINDIR"], 'gtobssim.exe')
 orbSim = os.path.join(os.environ["OBSERVATIONSIMROOT"],
                       os.environ["BINDIR"], 'gtorbsim.exe')
-if not os.path.exists("obsSim"):  # assume it is in the user's PATH
+if not os.path.exists(obsSim):
     obsSim = "gtobssim"
-if not os.path.exists("orbSim"):  # assume it is in the user's PATH
-    obsSim = "gtorbsim"
+if not os.path.exists(orbSim):
+    orbSim = "gtorbsim"
 
 class RootWindow(Tk.Tk):
     def __init__(self, file=None):
