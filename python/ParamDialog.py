@@ -4,7 +4,7 @@ Dialog interface to a .par file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.4 2004/12/14 18:29:39 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.5 2005/12/14 01:38:48 jchiang Exp $
 """
 
 import os, sys
@@ -43,7 +43,7 @@ class ParamDialog(mySimpleDialog.Dialog):
     def apply(self):
         self.paramString = ""
         for param in self.parameters:
-            self.paramString += (" " + param.value())
+            self.paramString += param.fields[0] + "=" + param.value() + " "
 
 class ParamEntry:
     def __init__(self, parent, fields, row):
