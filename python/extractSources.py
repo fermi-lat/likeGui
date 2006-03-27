@@ -6,7 +6,7 @@ Likelihood-style source model xml file and a ds9 region file.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.8 2005/11/19 07:02:32 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.9 2006/03/09 07:25:58 jchiang Exp $
 #
 import os, sys, string, copy
 from xml.dom import minidom
@@ -126,6 +126,7 @@ class PointSource(object):
         self._getSpecParams()
         self._setIndex()
         self._setPrefactor()
+        self._setFlux()
     def _setDir(self):
         dir = self.fluxSrc.getElementsByTagName('celestial_dir')[0]
         spatialModel = self.ptsrc.getElementsByTagName('spatialModel')[0]
@@ -155,6 +156,13 @@ class PointSource(object):
             self._setSpecParam('Prefactor', prefactor)
         else:
             self._setSpecParam('Prefactor', 1)
+    def _setFlux(self):
+        if self.use_cat_val:
+            flux = string.atof(self.fluxSrc.getAttribute('flux').
+                               encode('ascii'))*1e-04/1e-6
+            self._setSpecParam('Integral', flux)
+        else:
+            self._setSpecParam('Integral', 1)
     def _setSpecParam(self, paramName, value):
         spectrum = self.ptsrc.getElementsByTagName('spectrum')[0]
         params = spectrum.getElementsByTagName('parameter')

@@ -6,7 +6,7 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.10 2006/01/14 00:34:29 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.11 2006/02/08 02:24:49 jchiang Exp $
 #
 
 import copy
@@ -48,6 +48,19 @@ def ExpCutoff():
       <parameter free="1" max="300.0" min="0.1" name="P1" scale="1000.0" value="100."/>
       <parameter free="0" max="1.0" min="-1.0" name="P2" scale="1.0" value="0"/>
       <parameter free="0" max="1.0" min="-1.0" name="P3" scale="1.0" value="0"/>
+    </spectrum>
+"""
+    (func, ) = minidom.parseString(func).getElementsByTagName('spectrum')
+    return Function(func)
+
+def BPLExpCutoff():
+    func = """<spectrum type="BPLExpCutoff">
+      <parameter free="1" max="100000.0" min="0.01" name="Prefactor" scale="1e-09" value="1"/>
+      <parameter free="1" max="-1.001" min="-5." name="Index1" scale="1.0" value="-2.1"/>
+      <parameter free="1" max="-1.001" min="-5." name="Index2" scale="1.0" value="-2.1"/>
+      <parameter free="1" max="10000.0" min="1.0" name="BreakValue" scale="1.0" value="1000.0"/>
+      <parameter free="1" max="300.0" min="1.0" name="Eabs" scale="1.0" value="10.0"/>
+      <parameter free="1" max="300.0" min="0.1" name="P1" scale="1000.0" value="100."/>
     </spectrum>
 """
     (func, ) = minidom.parseString(func).getElementsByTagName('spectrum')
@@ -187,6 +200,7 @@ class Spectra(FuncContainer):
         self.funcs['ConstantValue'] = ConstantValueSpectrum()
         self.funcs['FileFunction'] = FileFunction()
         self.funcs['ExpCutoff'] = ExpCutoff()
+        self.funcs['BPLExpCutoff'] = BPLExpCutoff()
 
 class SpatialModels(FuncContainer):
     def __init__(self):
