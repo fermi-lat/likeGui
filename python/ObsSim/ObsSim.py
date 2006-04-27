@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 """
-Prototype GUI for obsSim
+Prototype GUI for driving gtobssim and gtorbsim
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.17 2006/02/07 22:45:56 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.18 2006/02/10 07:24:39 jchiang Exp $
 #
 import os, sys, time
 import Tkinter as Tk
@@ -36,7 +36,7 @@ if not os.path.exists(orbSim):
 class RootWindow(Tk.Tk):
     def __init__(self, file=None):
         Tk.Tk.__init__(self)
-        self.title("obsSim GUI")
+        self.title("ObsSim GUI")
         menuBar = MenuBar(self)
 
         inputFrames = Tk.Frame(self)

@@ -4,7 +4,7 @@ Dialog interface to a .par file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.5 2005/12/14 01:38:48 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ParamDialog.py,v 1.6 2006/03/06 17:18:58 jchiang Exp $
 """
 
 import os, sys
@@ -120,7 +120,7 @@ class ParamEntry:
                 pass
             self.variable.set(file)
     def getRandomInt(self):
-        my_int = int(random.random()*sys.maxint/1e3)
+        my_int = 4*int(random.random()*sys.maxint/1e4) + 1
         self.variable.set(`my_int`)
         
 class SetVar:
