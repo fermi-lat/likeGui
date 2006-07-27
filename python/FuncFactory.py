@@ -6,7 +6,7 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.11 2006/02/08 02:24:49 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.12 2006/03/27 17:45:21 jchiang Exp $
 #
 
 import copy
@@ -216,13 +216,13 @@ class SpatialModels(FuncContainer):
 def PtSrc(indx=0):
     name = "point source %i" % indx
     src = '\n'.join( (('<source name= "%s" ' % name) + 'type="PointSource">',
-                      '   <spectrum type="PowerLaw"/>',
+                      '   <spectrum type="PowerLaw2"/>',
                       '   <!-- point source units are cm^-2 s^-1 MeV^-1 -->',
                       '   <spatialModel type="SkyDirFunction"/>',
                       '</source>\n') )
-    (src, ) = minidom.parseString(src).getElementsByTagName('source')
+    src = minidom.parseString(src).getElementsByTagName('source')[0]
     src = Source(src)
-    src.spectrum = PowerLaw()
+    src.spectrum = PowerLaw2()
     src.deleteChildElements('spectrum')
     src.node.appendChild(src.spectrum.node)
     
