@@ -6,7 +6,7 @@ model Functions.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.12 2006/03/27 17:45:21 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/FuncFactory.py,v 1.13 2006/07/27 20:57:00 jchiang Exp $
 #
 
 import copy
@@ -158,7 +158,7 @@ def ConstantValue():
 
 def SpatialMap():
     func = '\n'.join( ('<spatialModel '
-                       + 'file="$(LIKELIHOODROOT)/src/test/Data/gas.cel" '
+                       + 'file="$(EXTFILESSYS)/galdiffuse/EGRET_diffuse_cel.fits" '
                        + 'type="SpatialMap">',
                        '   <parameter max="1000" min="0.001" free="0" '
                        + 'name="Prefactor" scale="1" value="1" />',
