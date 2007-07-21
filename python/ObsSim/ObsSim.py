@@ -5,7 +5,7 @@ Prototype GUI for driving gtobssim and gtorbsim
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.18 2006/02/10 07:24:39 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.19 2006/04/27 15:32:34 jchiang Exp $
 #
 import os, sys, time
 import Tkinter as Tk
@@ -112,8 +112,8 @@ class RootWindow(Tk.Tk):
         self.sourceList.writeSourceNames(sourceNames)
         pfile = 'gtobssim.par'
         pars = Pil(pfile)
-        pars['xml_source_file'] = xmlList
-        pars['source_list'] = sourceNames
+        pars['infile'] = xmlList
+        pars['srclist'] = sourceNames
         pars.write(os.path.join(pfilesPath(), pfile))
         dialog = ParamDialog(self, pfile)
         if dialog.paramString:
