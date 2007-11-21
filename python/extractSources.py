@@ -6,7 +6,7 @@ Likelihood-style source model xml file and a ds9 region file.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.10 2006/03/27 17:45:21 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.11 2007/11/04 22:26:59 jchiang Exp $
 #
 import os, sys, string, copy
 from xml.dom import minidom
@@ -193,7 +193,12 @@ class ds9_region_file:
                             dir.getAttribute('dec').encode('ascii') )
     def addSource(self, srcName, src):
         ra, dec = `src.spatialModel.RA.value`, `src.spatialModel.DEC.value`
-        self.srcs[srcName] = (ra, dec)
+        self.srcs[srcName] = [ra, dec]
+        sourceType = src.node.getAttribute('sourceType').encode()
+        if sourceType == 'DRP':
+            self.srcs[srcName].append('red')
+        elif sourceType == 'Blazar':
+            self.srcs[srcName].append('blue')
     def setSR(self, ra, dec, radius):
         self.SR = (ra, dec, radius)
     def write(self):
@@ -204,12 +209,18 @@ class ds9_region_file:
                    + 'fixed=0 source\n')
         for src in self.srcs:
             if self.fk5:
-                file.write('fk5;point(%s, %s) # point=circle' % self.srcs[src])
+                file.write('fk5;point(%s, %s) # point=circle'
+                           % tuple(self.srcs[src][:2]))
             else:
                 file.write('physical;point(%s, %s) # point=circle' %
-                           self.srcs[src])
+                           tuple(self.srcs[src][:2]))
             if src in self.targets:
                 file.write(', color=red')
+            else:
+                try:
+                    file.write(', color=%s' % self.srcs[src][2])
+                except IndexError:
+                    pass
             file.write('\n')
         if self.SR is not None:
             if self.fk5:
