@@ -6,7 +6,7 @@ Likelihood-style source model xml file and a ds9 region file.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.11 2007/11/04 22:26:59 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/extractSources.py,v 1.12 2007/11/21 04:27:41 jchiang Exp $
 #
 import os, sys, string, copy
 from xml.dom import minidom
@@ -18,8 +18,11 @@ from FileDialog import LoadFileDialog, SaveFileDialog
 import celgal
 from xmlSrcLib import *
 from readXml import Source
+from facilities import py_facilities
 
-_3EG_catalog = os.path.join(os.environ['OBSERVATIONSIMROOT'],
+os_environ = py_facilities.commonUtilities_getEnvironment
+#_3EG_catalog = os.path.join(os.environ['OBSERVATIONSIMROOT'],
+_3EG_catalog = os.path.join(os_environ('OBSERVATIONSIMROOT'),
                             'xml', '3EG_catalog_20-1e6MeV.xml')
 
 class LikeSource(object):
