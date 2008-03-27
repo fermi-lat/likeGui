@@ -5,13 +5,17 @@ Prototype GUI for driving gtobssim and gtorbsim
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.19 2006/04/27 15:32:34 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.20 2007/07/21 20:44:13 jchiang Exp $
 #
 import os, sys, time
 import Tkinter as Tk
 import tkFileDialog
 from tkMessageBox import showwarning
 from FileDialog import LoadFileDialog, SaveFileDialog
+
+from facilities import py_facilities
+py_facilities.commonUtilities_setupEnvironment()
+os_environ = py_facilities.commonUtilities_getEnvironment
 
 sys.path.insert(0, os.path.join(os.environ['LIKEGUIROOT'], 'python'))
 
@@ -418,7 +422,10 @@ def expandEnvVar(filename):
     if filename.find('$(') != -1:
         envVar = filename.split('$(')[1].split(')')[0]
         remainder = filename.split('$(')[1].split(')')[1]
-        return os.environ[envVar] + remainder
+        try:
+            return os.environ[envVar] + remainder
+        except KeyError:
+            return os_environ(envVar) + remainder
     else:
         return filename
 
