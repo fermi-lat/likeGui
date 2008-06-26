@@ -1,5 +1,5 @@
 # -*- python -*-
-# $Id: SConscript,v 1.3 2008/03/27 16:18:25 jchiang Exp $
+# $Id: SConscript,v 1.4 2008/06/19 23:24:38 glastrm Exp $
 # Authors: J. Chiang <jchiang@slac.stanford.edu>
 # Version: likeGui-07-08-02
 Import('baseEnv')
@@ -11,4 +11,4 @@ ModelEditorBin = progEnv.Program('ModelEditor', 'src/ModelEditor.cxx')
 
 progEnv.Tool('registerObjects', package = 'likeGui', 
              binaries = [ObsSimBin, ModelEditorBin],
-             python = listFiles(['python/*.py'])
+             python = listFiles(['python/*.py']))
