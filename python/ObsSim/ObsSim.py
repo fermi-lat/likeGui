@@ -5,12 +5,17 @@ Prototype GUI for driving gtobssim and gtorbsim
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.20 2007/07/21 20:44:13 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ObsSim/ObsSim.py,v 1.21 2008/03/27 16:15:33 jchiang Exp $
 #
 import os, sys, time
 import Tkinter as Tk
 import tkFileDialog
 from tkMessageBox import showwarning
+from facilities import py_facilities
+
+py_facilities.commonUtilities_setupEnvironment()
+os_environ = py_facilities.commonUtilities_getEnvironment
+
 from FileDialog import LoadFileDialog, SaveFileDialog
 
 from facilities import py_facilities
@@ -26,6 +31,7 @@ from ThreadedClient import runInThread
 from pil import Pil
 from pfilesPath import pfilesPath
 from create_library import makeSrcLib
+
 
 # @todo replace these with GtApp objects
 obsSim = os.path.join(os.environ["OBSERVATIONSIMROOT"],
