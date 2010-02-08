@@ -5,7 +5,7 @@ Prototype source model editor.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.21 2005/08/21 20:15:32 jchiang Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/likeGui/python/ModelEditor.py,v 1.22 2005/11/19 07:02:32 jchiang Exp $
 #
 
 import os
@@ -46,13 +46,14 @@ class RootWindow(Tk.Tk):
             except RuntimeError:
                 try:
                     version = ds9.xpaget("version")
-                    if version.find("3.0.3") == -1:
-                        showwarning("ds9 version", "using " + version.strip())
+#                    if version.find("3.0.3") == -1:
+#                        showwarning("ds9 version", "using " + version.strip())
                 except RuntimeError:
                     pass
         except ImportError:
-            showwarning(title="ds9 Access Warning",
-                        message="Import error for ds9 package.")
+#            showwarning(title="ds9 Access Warning",
+#                        message="Import error for ds9 package.")
+            pass
 
         menuBar = MenuBar(self)
         
