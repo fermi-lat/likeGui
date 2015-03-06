@@ -1,5 +1,5 @@
 # -*- python -*-
-# $Id: SConscript,v 1.12 2015/02/04 16:39:18 jchiang Exp $
+# $Id: SConscript,v 1.13 2015/02/12 15:50:31 jchiang Exp $
 # Authors: J. Chiang <jchiang@slac.stanford.edu>
 # Version: likeGui-07-11-00
 Import('baseEnv')
@@ -15,6 +15,7 @@ python_files = ['python/EditFileDialog.py',
                 'python/ParamDialog.py',
                 'python/ThreadedClient.py', 
                 'python/celgal.py', 
+                'python/saclay_celgal.py', 
                 'python/ds9.py', 
                 'python/extractSources.py',
                 'python/mySimpleDialog.py',
