@@ -4,9 +4,8 @@ Class for transforming between Equatorial and Galactic coordinates.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /nfs/slac/g/glast/ground/cvs/ScienceTools-scons/likeGui/python/celgal.py,v 1.9 2015/02/04 16:38:34 jchiang Exp $
+$Header: /nfs/slac/g/glast/ground/cvs/ScienceTools-scons/likeGui/python/celgal.py,v 1.10 2015/02/12 15:49:30 jchiang Exp $
 """
-from numpy import *
 import astropy.coordinates as coords
 import astropy.units as units
 from saclay_celgal import sindist2, SphCoords, Angdist, dist as saclay_dist
